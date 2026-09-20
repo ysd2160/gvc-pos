@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Good Vibes Cafe theme (primary colour). Badalna ho to sirf ye 8 values badlo. */
+:root {
+  --p50: 250 246 241;
+  --p100: 243 232 220;
+  --p200: 231 209 187;
+  --p300: 212 176 140;
+  --p400: 190 141 96;
+  --p500: 165 113 68;
+  --p600: 139 90 50;
+  --p700: 111 70 38;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Prevent iOS zoom on input focus */
+input, select, textarea {
+  font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 text-white font-medium rounded-xl px-4 py-3 min-h-[48px] active:scale-95 transition disabled:opacity-50 disabled:active:scale-100;
+  }
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 font-medium rounded-xl px-4 py-3 min-h-[48px] active:scale-95 transition;
+  }
+  .input-field {
+    @apply w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-4;
+  }
+  .chip {
+    @apply px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap bg-gray-100 text-gray-700 active:scale-95 transition;
+  }
+  .chip-active {
+    @apply bg-primary-600 text-white;
+  }
+}
