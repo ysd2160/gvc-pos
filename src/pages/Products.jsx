@@ -166,56 +166,168 @@ const Products = () => {
 
       {/* Add/Edit Product Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/40 flex items-end md:items-center justify-center z-30 p-0 md:p-4">
-          <div className="bg-white rounded-t-2xl md:rounded-2xl w-full md:max-w-md max-h-[90vh] overflow-y-auto p-5">
-            <h3 className="text-lg font-bold mb-4">{editingId ? "Edit Product" : "Add Product"}</h3>
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input required className="input-field" placeholder="Product name" value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })} />
-              <input className="input-field" placeholder={shop.key === "cafe" ? "Category (e.g. Coffee, Pizza)" : "Category (e.g. Momos, Snacks)"} value={form.category}
-                onChange={(e) => setForm({ ...form, category: e.target.value })} />
-              <div className={`grid gap-3 ${shop.gstEnabled ? "grid-cols-2" : "grid-cols-1"}`}>
-                <input className="input-field" placeholder="Unit (pcs/kg/cup)" value={form.unit}
-                  onChange={(e) => setForm({ ...form, unit: e.target.value })} />
-                {shop.gstEnabled && (
-                  <input type="number" step="0.01" className="input-field" placeholder="GST %" value={form.gstPercent}
-                    onChange={(e) => setForm({ ...form, gstPercent: e.target.value })} />
-                )}
-              </div>
-              {shop.gstEnabled && (
-                <input className="input-field" placeholder="HSN/SAC code (optional, for tax invoice)" value={form.hsn}
-                  onChange={(e) => setForm({ ...form, hsn: e.target.value })} />
-              )}
-              <div className="grid grid-cols-2 gap-3">
-                <input required type="number" step="0.01" className="input-field" placeholder="Cost Price ₹" value={form.costPrice}
-                  onChange={(e) => setForm({ ...form, costPrice: e.target.value })} />
-                <input required type="number" step="0.01" className="input-field" placeholder="Selling Price ₹" value={form.sellingPrice}
-                  onChange={(e) => setForm({ ...form, sellingPrice: e.target.value })} />
-              </div>
-              <label className="flex items-center gap-3 text-sm text-gray-700 min-h-[44px]">
-                <input type="checkbox" className="w-5 h-5" checked={form.trackStock}
-                  onChange={(e) => setForm({ ...form, trackStock: e.target.checked })} />
-                <span>
-                  Stock track karo
-                  <span className="block text-xs text-gray-400">Band rakho made-to-order items (coffee, pizza) ke liye</span>
-                </span>
-              </label>
-              {form.trackStock && !editingId && (
-                <input type="number" className="input-field" placeholder="Initial Stock Quantity" value={form.quantity}
-                  onChange={(e) => setForm({ ...form, quantity: e.target.value })} />
-              )}
-              {form.trackStock && (
-                <input type="number" className="input-field" placeholder="Low stock alert threshold" value={form.lowStockThreshold}
-                  onChange={(e) => setForm({ ...form, lowStockThreshold: e.target.value })} />
-              )}
+       <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-30 p-4">
+  <div className="bg-white rounded-2xl w-full md:max-w-md max-h-[90vh] overflow-y-auto p-5">
+    
+    <h3 className="text-lg font-bold mb-4">
+      {editingId ? "Edit Product" : "Add Product"}
+    </h3>
 
-              <div className="flex gap-2 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">Cancel</button>
-                <button type="submit" className="btn-primary flex-1">Save</button>
-              </div>
-            </form>
-          </div>
-        </div>
+    <form onSubmit={handleSubmit} className="space-y-3">
+
+      <input
+        required
+        className="input-field"
+        placeholder="Product name"
+        value={form.name}
+        onChange={(e) =>
+          setForm({ ...form, name: e.target.value })
+        }
+      />
+
+      <input
+        className="input-field"
+        placeholder={
+          shop.key === "cafe"
+            ? "Category (e.g. Coffee, Pizza)"
+            : "Category (e.g. Momos, Snacks)"
+        }
+        value={form.category}
+        onChange={(e) =>
+          setForm({ ...form, category: e.target.value })
+        }
+      />
+
+      <div
+        className={`grid gap-3 ${
+          shop.gstEnabled ? "grid-cols-2" : "grid-cols-1"
+        }`}
+      >
+        <input
+          className="input-field"
+          placeholder="Unit (pcs/kg/cup)"
+          value={form.unit}
+          onChange={(e) =>
+            setForm({ ...form, unit: e.target.value })
+          }
+        />
+
+        {shop.gstEnabled && (
+          <input
+            type="number"
+            step="0.01"
+            className="input-field"
+            placeholder="GST %"
+            value={form.gstPercent}
+            onChange={(e) =>
+              setForm({ ...form, gstPercent: e.target.value })
+            }
+          />
+        )}
+      </div>
+
+      {shop.gstEnabled && (
+        <input
+          className="input-field"
+          placeholder="HSN/SAC code (optional, for tax invoice)"
+          value={form.hsn}
+          onChange={(e) =>
+            setForm({ ...form, hsn: e.target.value })
+          }
+        />
+      )}
+
+      <div className="grid grid-cols-2 gap-3">
+        <input
+          required
+          type="number"
+          step="0.01"
+          className="input-field"
+          placeholder="Cost Price ₹"
+          value={form.costPrice}
+          onChange={(e) =>
+            setForm({ ...form, costPrice: e.target.value })
+          }
+        />
+
+        <input
+          required
+          type="number"
+          step="0.01"
+          className="input-field"
+          placeholder="Selling Price ₹"
+          value={form.sellingPrice}
+          onChange={(e) =>
+            setForm({ ...form, sellingPrice: e.target.value })
+          }
+        />
+      </div>
+
+      <label className="flex items-center gap-3 text-sm text-gray-700 min-h-[44px]">
+        <input
+          type="checkbox"
+          className="w-5 h-5"
+          checked={form.trackStock}
+          onChange={(e) =>
+            setForm({ ...form, trackStock: e.target.checked })
+          }
+        />
+
+        <span>
+          Stock track karo
+          <span className="block text-xs text-gray-400">
+            Band rakho made-to-order items (coffee, pizza) ke liye
+          </span>
+        </span>
+      </label>
+
+      {form.trackStock && !editingId && (
+        <input
+          type="number"
+          className="input-field"
+          placeholder="Initial Stock Quantity"
+          value={form.quantity}
+          onChange={(e) =>
+            setForm({ ...form, quantity: e.target.value })
+          }
+        />
+      )}
+
+      {form.trackStock && (
+        <input
+          type="number"
+          className="input-field"
+          placeholder="Low stock alert threshold"
+          value={form.lowStockThreshold}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              lowStockThreshold: e.target.value,
+            })
+          }
+        />
+      )}
+
+      <div className="flex gap-2 pt-2">
+        <button
+          type="button"
+          onClick={() => setShowForm(false)}
+          className="btn-secondary flex-1"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          className="btn-primary flex-1"
+        >
+          Save
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
       )}
 
       {/* Stock Add Modal */}
