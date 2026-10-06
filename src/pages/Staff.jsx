@@ -77,29 +77,68 @@ const Staff = () => {
         </div>
       )}
 
-      {showForm && (
-        <div className="fixed inset-0 bg-black/40 flex items-end md:items-center justify-center z-30">
-          <div className="bg-white rounded-t-2xl md:rounded-2xl w-full md:max-w-sm p-5">
-            <h3 className="text-lg font-bold mb-4">Add Staff Member</h3>
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input required className="input-field" placeholder="Full name" value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })} />
-              <input required type="email" className="input-field" placeholder="Email" value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })} />
-              <input required type="password" minLength={6} className="input-field" placeholder="Password (min 6 chars)" value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })} />
-              <select className="input-field" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
-                <option value="staff">Staff</option>
-                <option value="admin">Admin</option>
-              </select>
-              <div className="flex gap-2 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="btn-secondary flex-1">Cancel</button>
-                <button type="submit" className="btn-primary flex-1">Create</button>
-              </div>
-            </form>
-          </div>
+    {showForm && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-30 p-4">
+    <div className="bg-white rounded-2xl w-full md:max-w-sm p-5 max-h-[90vh] overflow-y-auto">
+      <h3 className="text-lg font-bold mb-4">Add Staff Member</h3>
+
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <input
+          required
+          className="input-field"
+          placeholder="Full name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+
+        <input
+          required
+          type="email"
+          className="input-field"
+          placeholder="Email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+
+        <input
+          required
+          type="password"
+          minLength={6}
+          className="input-field"
+          placeholder="Password (min 6 chars)"
+          value={form.password}
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+        />
+
+        <select
+          className="input-field"
+          value={form.role}
+          onChange={(e) => setForm({ ...form, role: e.target.value })}
+        >
+          <option value="staff">Staff</option>
+          <option value="admin">Admin</option>
+        </select>
+
+        <div className="flex gap-2 pt-2">
+          <button
+            type="button"
+            onClick={() => setShowForm(false)}
+            className="btn-secondary flex-1"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            className="btn-primary flex-1"
+          >
+            Create
+          </button>
         </div>
-      )}
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
 };
